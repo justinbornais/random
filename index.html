@@ -37,7 +37,7 @@
         var Android = userAgent.indexOf("android") > -1;
         var link = window.location.href;
         
-        const data = [{name: "Assignments", type: "folder"},{name: "Final", type: "folder"},{name: "Midterm 1", type: "folder"},{name: "Midterm 2", type: "folder"},{name: "Equi_InferRluesSHEET(4).pdf", type: "file"},{name: "combinatorial-mathematics.pdf", type: "file"},{name: "course.pdf", type: "file"},{name: "graph-theory-douglas-b-west-2-ed.pdf", type: "file"},{name: "theorems.pdf", type: "file"},]
+        const data = [{name: "Notes", type: "folder"},{name: "Textbooks", type: "folder"},]
         
         const fuse = new Fuse(data, {
             keys: ['name'],
