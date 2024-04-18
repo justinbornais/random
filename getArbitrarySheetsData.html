@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function tscToTableHTML(tabSeparatedContent) {
+            var rows = tabSeparatedContent.split('\n');
+            var html = '<table>';
+            rows.forEach(function(row, index) {
+                var cells = row.split('\t');
+                var tag = index === 0 ? 'th' : 'td';
+                html += '<tr>';
+
+                cells.forEach(function(cell) {
+                    html += '<' + tag + '>' + cell + '</' + tag + '>';
+                });
+                html += '</tr>';
+            });
+
+            html += '</table>';
+            return html;
+        }
+
+        function tscToJSON(tabSeparatedContent) {
+            var rows = tabSeparatedContent.split('\n');
+            var headers = rows[0].split('\t'); // Headers for JSON object.
+
+            var jsonArray = [];
+            for (var i = 1; i < rows.length; i++) {
+              var rowData = rows[i].split('\t');
+              var obj = {};
+          
+              for (var j = 0; j < headers.length; j++) {
+                obj[headers[j]] = rowData[j];
+              }
+          
+              jsonArray.push(obj);
+            }
+            return jsonArray;
+          }
+
+        fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTo3pQyPvvIbzuosE9_wtd6EUsSOKZTGAQwreLdlgGBbs6VRzsUx_3XbTCBRQzU9RrFmIvHmn5H1zTd/pub?gid=1515271646&single=true&output=tsv")
+            .then(response => response.text())
+            .then(data => {
+                data = data.replaceAll("\r", "")
+                var htmlData = tscToTableHTML(data);
+                var jsonArray = tscToJSON(data);
+                document.write(htmlData);
+                console.log(jsonArray);
+            });
+
+    </script>
+</body>
+</html>
