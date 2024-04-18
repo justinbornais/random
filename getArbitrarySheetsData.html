@@ -33,6 +33,7 @@
     </style>
 </head>
 <body>
+    <div id="site-content"></div>
     <script type="text/javascript">
         function tscToTableHTML(tabSeparatedContent) {
             var rows = tabSeparatedContent.split('\n');
@@ -77,7 +78,7 @@
                 data = data.replaceAll("\r", "")
                 var htmlData = tscToTableHTML(data);
                 var jsonArray = tscToJSON(data);
-                document.write(htmlData);
+                document.getElementByID("site-content").innerHTML = htmlData;
                 console.log(jsonArray);
                 console.log(Date.now() - start);
             });
