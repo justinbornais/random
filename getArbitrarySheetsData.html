@@ -78,7 +78,7 @@
                 data = data.replaceAll("\r", "")
                 var htmlData = tscToTableHTML(data);
                 var jsonArray = tscToJSON(data);
-                document.getElementByID("site-content").innerHTML = htmlData;
+                document.getElementById("site-content").innerHTML = htmlData;
                 console.log(jsonArray);
                 console.log(Date.now() - start);
             });
